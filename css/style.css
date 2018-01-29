@@ -14,6 +14,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 ul {
@@ -84,7 +85,7 @@ h1 {
     color: rgb(51, 19, 110);
     /* color: white; */
     border-radius: 8%;
-    font-size: 2.5em;
+    font-size: 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -92,3 +93,18 @@ h1 {
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgb(44, 16, 95);
 }
+
+/* Viewport over 730px */
+
+@media only screen and (min-width: 730px) {
+    .deck {
+        width: 540px;
+        height: 570px;
+    }
+    .card {
+        width: 112.5px;
+        height: 120px;
+    }
+
+}
+
