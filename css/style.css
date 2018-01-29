@@ -1,4 +1,4 @@
-/* FICHER CSS MEMORY GAME */
+/* smartphone viewport (portrait) */
 
 body {
     margin: 0;
@@ -25,15 +25,15 @@ ul {
 h1 {
     font-family: 'Alegreya Sans', sans-serif;
     margin-bottom: 5px;
-    /* color: rgb(110, 19, 87); */
 }
 
 .score {
     display: flex;
     flex-wrap: nowrap;
     text-align: left;
-    width: 80%;
+    width: 360px;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .score .stars li {
@@ -43,7 +43,11 @@ h1 {
 .stars {
     width: 30%;
     padding: 0;
-    justify-content: space-between;
+    padding-left: 5px;
+}
+
+.stars li {
+    margin-right: 5px;
 }
 
 .moves {
@@ -53,4 +57,38 @@ h1 {
 .restart {
     width: 20%;
     text-align: right;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+/* Style for deck */
+
+.deck {
+    width: 360px;;
+    height: 380px;;
+    padding:  8px;
+    margin: 0;
+    background-color:  rgba(51, 19, 110, 0.336);
+    border-radius: 8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card {
+    width: 75px;
+    height: 80px;
+    /* align-items: center; */
+    background-color: rgb(51, 19, 110);
+    color: rgb(51, 19, 110);
+    /* color: white; */
+    border-radius: 8%;
+    font-size: 2.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 5px 2px 20px 0 rgb(44, 16, 95);
 }
