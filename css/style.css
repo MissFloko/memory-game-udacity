@@ -2,9 +2,10 @@
 
 body {
     margin: 0;
-    height: 100vh;
     width: 100vw;
     background-image: radial-gradient(rgb(219, 120, 231), rgb(51, 19, 110));
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: pink;
     align-items: center;
@@ -99,7 +100,7 @@ h1 {
 
 /* Viewport over 730px */
 
-@media screen and (min-width: 730px) and (orientation:landscape) {
+@media screen and (min-width: 730px) {
     .deck {
         width: 540px;
         height: 570px;
