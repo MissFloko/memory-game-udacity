@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    width: 100vw;
+    height: 100vh;
     background-image: radial-gradient(rgb(219, 120, 231), rgb(51, 19, 110));
     background-size: cover;
     background-repeat: no-repeat;
@@ -86,8 +86,8 @@ h1 {
     height: 80px;
     /* align-items: center; */
     background-color: rgb(51, 19, 110);
-    color: rgb(51, 19, 110);
-    /* color: white; */
+    /* color: rgb(51, 19, 110); */
+    color: white;
     border-radius: 8%;
     font-size: 0;
     text-align: center;
@@ -96,6 +96,7 @@ h1 {
     justify-content: center;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgb(44, 16, 95);
+    transition-duration: 500ms;
 }
 
 /* Viewport over 730px */
