@@ -22,7 +22,7 @@
 const cards = Array.from(document.getElementsByClassName('card'));
 
 // function mix (card) {
-//     var currentIndex= cards.length, temporaryValue, randomIndex;
+//     let currentIndex= cards.length, temporaryValue, randomIndex;
 
 //     // While there remain elements to shuffle...
 //     while (0 !== currentIndex) {
@@ -39,10 +39,10 @@ const cards = Array.from(document.getElementsByClassName('card'));
 
 //   return cards;
 // }
-
-var symbol1;
-var symbol2;
-var click = 0;
+let card1;
+let symbol1;
+let symbol2;
+let click = 0;
 
 cards.forEach(function(card, index) {  //click ans transformation of the card
      card.addEventListener('click', onCardClicked);
@@ -51,20 +51,27 @@ cards.forEach(function(card, index) {  //click ans transformation of the card
 function onCardClicked(event) {
     const card = event.target;
     console.log('haha');
-    card.style.cssText="color:pink; background-color:#a52aac; font-size:2.5em; box-shadow: 5px 2px 20px 0 rgb(121, 18, 127);"
+    if (card.className !== 'card') {
+        return;
+    }
+    card.classList.add("shown-card");
     click++;
     console.log(click);
-
-    // pour click=pair --> comparer les deux dernières valeurs de symbol (i%2===0 -->pair)
     if (click % 2 === 0){
         symbol2 = card.children[0].className;
         if (symbol1 === symbol2){
             console.log('trouvé!');
         } else {
             console.log('try again');
+            setTimeout(function(){
+                card.classList.remove("shown-card");
+                card1.classList.remove("shown-card");
+            }, 800);
+            
         }
     } else {
         symbol1 = card.children[0].className;
+        card1 = card;
     }
     // si symbol a une valeur
         // comparer
@@ -85,7 +92,7 @@ function onCardClicked(event) {
 // }
 
 // function game (){
-//     var click = 0;
+//     let click = 0;
 //     if (click <= 2) {
 //         sameCard();
 //     }
@@ -93,8 +100,8 @@ function onCardClicked(event) {
 
 
 // function sameCard (){
-// var image1 = document.getElementsByTagName('i'); //mon premier symbol cliqué
-// var image2 = document.getElementById('i'); //mon second symbol cliqué
+// let image1 = document.getElementsByTagName('i'); //mon premier symbol cliqué
+// let image2 = document.getElementById('i'); //mon second symbol cliqué
 
 
 // if (image1 === image2) {

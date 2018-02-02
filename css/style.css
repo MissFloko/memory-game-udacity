@@ -87,7 +87,6 @@ h1 {
     /* align-items: center; */
     background-color: rgb(51, 19, 110);
     /* color: rgb(51, 19, 110); */
-    color: white;
     border-radius: 8%;
     font-size: 0;
     text-align: center;
@@ -96,6 +95,21 @@ h1 {
     justify-content: center;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgb(44, 16, 95);
+    transition-duration: 500ms;
+}
+
+.shown-card {
+    width: 75px;
+    height: 80px;
+    background-color: #a52aac;
+    color: pink;
+    border-radius: 8%;
+    font-size: 2.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 2px 20px 0 rgb(121, 18, 127);
     transition-duration: 500ms;
 }
 
