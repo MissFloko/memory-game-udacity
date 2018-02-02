@@ -19,7 +19,7 @@
 //             - score (nb de mouvement + nb étoiles)
 //             - rejouer ?
 
-const cards = Array.from(document.getElementsByClassName('card'));
+
 
 // function mix (card) {
 //     let currentIndex= cards.length, temporaryValue, randomIndex;
@@ -39,6 +39,8 @@ const cards = Array.from(document.getElementsByClassName('card'));
 
 //   return cards;
 // }
+
+const cards = Array.from(document.getElementsByClassName('card'));
 let card1;
 let symbol1;
 let symbol2;
@@ -60,56 +62,38 @@ function onCardClicked(event) {
     if (click % 2 === 0){
         symbol2 = card.children[0].className;
         if (symbol1 === symbol2){
-            console.log('trouvé!');
+            console.log('trouvé!');            
         } else {
             console.log('try again');
             setTimeout(function(){
                 card.classList.remove("shown-card");
                 card1.classList.remove("shown-card");
-            }, 800);
-            
+            }, 700);           
         }
     } else {
         symbol1 = card.children[0].className;
         card1 = card;
     }
-    // si symbol a une valeur
-        // comparer
-    // sinon
-        // on compare pas
 }
 
-// function sameGame() {
-//     const open = document.createElement('ul');
-//     open.push("i");
-//     for (open = 0 ; open.lenght <= 1 ; open ++) {
-//         if (open[0] === open[1]){
-//             card.style.cssText='opacity:0.5 ; position:absolute;';
-//         } else {
-//             card.style.cssText
-//         }
-//     }
+// var move = 0
+// const star = document.getElementsByClassName('stars');
+// if (click % 2 === 0) {
+//     move++;    
 // }
-
-// function game (){
-//     let click = 0;
-//     if (click <= 2) {
-//         sameCard();
-//     }
+// for (var x = 0 ; x <= 10 ; x++){
+//     console.log ('ye!');
 // }
-
-
-// function sameCard (){
-// let image1 = document.getElementsByTagName('i'); //mon premier symbol cliqué
-// let image2 = document.getElementById('i'); //mon second symbol cliqué
-
-
-// if (image1 === image2) {
-//     console.log('ok');
-//     card.style.cssText="opacity:0.5; position:absolute;";
-// } else {
-//     console.log ('encore un tour');
-//     card.style.cssText="font-size"
+// for (var x = 11 ; x <= 15 ; x++) {
+//     stars.children[2].classList.remove("fas");
+//     stars.children[2].classList.add("far")
 // }
+// for (var x = 16 ; x <= 20 ; x++) {
+//     stars.children[1].classList.remove("fas");
+//     stars.children[1].classList.add("far")
+// }
+// for (var x = 11 ; x > 21 ; x++) {
+//     stars.children[0].classList.remove("fas");
+//     stars.children[0].classList.add("far")
 // }
 

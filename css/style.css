@@ -109,8 +109,10 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 5px 2px 20px 0 rgb(121, 18, 127);
-    transition-duration: 500ms;
+    box-shadow: -5px 2px 20px 0 rgb(121, 18, 127);
+    /* flip of the card */
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 /* Viewport over 730px */
