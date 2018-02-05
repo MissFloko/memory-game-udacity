@@ -53,15 +53,19 @@ cards.forEach(function(card, index) {  //click ans transformation of the card
 
 function onCardClicked(event) {
     const card = event.target;
-    console.log('haha');
     if (card.className !== 'card') {
         return;
     }
     card.classList.add("shown-card");
     click++;
     console.log(click);
+    maybeMatch(card);
+}
+
+function maybeMatch (card) {
     if (click % 2 === 0){
         incrementMove();
+        changeScore();
         symbol2 = card.children[0].className;
         if (symbol1 === symbol2){
             console.log('trouvé!');            
@@ -84,23 +88,23 @@ function incrementMove() {
     let movesSpan = document.querySelector('.moves');
     movesSpan.innerHTML = move + " Moves";
 }
-// var move = 0
-// const star = document.getElementsByClassName('stars');
-// if (click % 2 === 0) {
-//     move++;    
-// }
-// for (var x = 0 ; x <= 10 ; x++){
-//     console.log ('ye!');
-// }
-// for (var x = 11 ; x <= 15 ; x++) {
-//     stars.children[2].classList.remove("fas");
-//     stars.children[2].classList.add("far")
-// }
-// for (var x = 16 ; x <= 20 ; x++) {
-//     stars.children[1].classList.remove("fas");
-//     stars.children[1].classList.add("far")
-// }
-// for (var x = 11 ; x > 21 ; x++) {
-//     stars.children[0].classList.remove("fas");
-//     stars.children[0].classList.add("far")
-// }
+
+function changeScore() {
+    console.log(move);
+    const scoreStar = document.querySelectorAll('ul.stars > li > i');
+    if (move === 11) {
+        //2 étoiles
+        scoreStar[2].classList.remove("fas");
+        scoreStar[2].classList.add("far");
+    }
+    else if (move === 16) {
+        //1 étoile
+        scoreStar[1].classList.remove("fas");
+        scoreStar[1].classList.add("far");
+    }
+    else if (move === 21) {
+        //pas d'étoile
+        scoreStar[0].classList.remove("fas");
+        scoreStar[0].classList.add("far");
+    }
+}
