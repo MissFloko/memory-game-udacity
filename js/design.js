@@ -45,6 +45,7 @@ let card1;
 let symbol1;
 let symbol2;
 let click = 0;
+let move = 0;
 
 cards.forEach(function(card, index) {  //click ans transformation of the card
      card.addEventListener('click', onCardClicked);
@@ -60,6 +61,7 @@ function onCardClicked(event) {
     click++;
     console.log(click);
     if (click % 2 === 0){
+        incrementMove();
         symbol2 = card.children[0].className;
         if (symbol1 === symbol2){
             console.log('trouvé!');            
@@ -76,6 +78,12 @@ function onCardClicked(event) {
     }
 }
 
+
+function incrementMove() {
+    move++;
+    let movesSpan = document.querySelector('.moves');
+    movesSpan.innerHTML = move + " Moves";
+}
 // var move = 0
 // const star = document.getElementsByClassName('stars');
 // if (click % 2 === 0) {
@@ -96,4 +104,3 @@ function onCardClicked(event) {
 //     stars.children[0].classList.remove("fas");
 //     stars.children[0].classList.add("far")
 // }
-
