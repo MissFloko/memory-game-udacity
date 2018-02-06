@@ -52,13 +52,14 @@ cards.forEach(function(card, index) {  //click ans transformation of the card
 });
 
 function onCardClicked(event) {
+    // const startingTime = performance.now();
     const card = event.target;
     if (card.className !== 'card') {
         return;
     }
     card.classList.add("shown-card");
     click++;
-    console.log(click);
+    console.log(click + " click");
     maybeMatch(card);
 }
 
@@ -68,7 +69,8 @@ function maybeMatch (card) {
         changeScore();
         symbol2 = card.children[0].className;
         if (symbol1 === symbol2){
-            console.log('trouvé!');            
+            console.log('you find it');
+            endGame(card);          
         } else {
             console.log('try again');
             setTimeout(function(){
@@ -90,7 +92,6 @@ function incrementMove() {
 }
 
 function changeScore() {
-    console.log(move);
     const scoreStar = document.querySelectorAll('ul.stars > li > i');
     if (move === 11) {
         //2 étoiles
@@ -108,3 +109,18 @@ function changeScore() {
         scoreStar[0].classList.add("far");
     }
 }
+
+function endGame(card) {
+    let faceCard = document.getElementsByClassName('shown-card');
+    setTimeout(function(){
+       if (faceCard.length === 2) {
+        // const endingTime = performance.now();
+        // console.log(endGame - startingTime);
+        const popUp = document.querySelector('.alert');
+        popUp.classList.add("win-game");
+        const game = document.querySelector('.container');
+        game.classList.add('background-win');
+    }}, 1100);
+}
+
+// const alertPopUp = document.getElementsByClassName('alert');
