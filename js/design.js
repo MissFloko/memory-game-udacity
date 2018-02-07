@@ -30,12 +30,13 @@ let symbol1;
 let symbol2;
 let click = 0;
 let move = 0;
+let startingTime;
 
 prepareGame();
 
 cards.forEach(function(card, index) {  //click ans transformation of the card
      card.addEventListener('click', onCardClicked);
-     const startingTime = performance.now();
+     startingTime = performance.now();
 });
 
 function onCardClicked(event) {
@@ -45,7 +46,7 @@ function onCardClicked(event) {
     }
     card.classList.add("shown-card");
     click++;
-    console.log(click + " click");
+    // console.log(click + " click");
     maybeMatch(card);
     playAgain();
 }
@@ -102,7 +103,7 @@ function maybeEndGame(card) {
     setTimeout(function(){
        if (faceCard.length === 2) {
         const endingTime = performance.now();
-        console.log(endingTime - startingTime);
+        console.log("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
         
         popUp.classList.add("win-game");
         
@@ -125,8 +126,6 @@ function playAgain() {
     })
     again.addEventListener('click', function() {
         console.log('want to play again');
-        // popUp.classList.remove('win-game');
-        // game.classList.remove('background-win');
         setTimeout( function() {
             location.reload();
         }, 200);
