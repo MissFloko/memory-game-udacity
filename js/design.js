@@ -19,7 +19,7 @@ function prepareGame() {
     let oneI = Array.from(document.querySelectorAll('ul.deck > li > i.fas'));
     oneI.forEach(function(i, index) {
         let oneSymbol = mixImages[index];
-        i.className = "fas " + oneSymbol;
+        i.className = "fas " + oneSymbol;;
     }) 
 }
 
@@ -31,6 +31,9 @@ let symbol2;
 let click = 0;
 let move = 0;
 let startingTime;
+const game = document.querySelector('.container');
+const popUp = document.querySelector('.alert');
+let preventClick = false;
 
 prepareGame();
 
@@ -39,16 +42,33 @@ cards.forEach(function(card, index) {  //click ans transformation of the card
      startingTime = performance.now();
 });
 
+const again = document.querySelector('button');
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', function(){
+    console.log('restart game');
+    location.reload();
+})
+again.addEventListener('click', function() {
+    console.log('want to play again');
+    setTimeout( function() {
+        location.reload();
+    }, 200);
+})
+
 function onCardClicked(event) {
     const card = event.target;
     if (card.className !== 'card') {
         return;
     }
+
+    if (preventClick) {
+        return;
+    }
+
     card.classList.add("shown-card");
     click++;
     // console.log(click + " click");
     maybeMatch(card);
-    playAgain();
 }
 
 function maybeMatch (card) {
@@ -60,10 +80,12 @@ function maybeMatch (card) {
             console.log('you find it');
             maybeEndGame(card);          
         } else {
+            preventClick = true;
             console.log('try again');
             setTimeout(function(){
                 card.classList.remove("shown-card");
                 card1.classList.remove("shown-card");
+                preventClick = false;
             }, 700);           
         }
     } else {
@@ -80,54 +102,40 @@ function incrementMove() {
 }
 
 function changeScore() {
-    const scoreStar = document.querySelectorAll('ul.stars > li > i');
-    if (move === 15) {
+    const scoreStar = document.querySelectorAll('div.score > ul.stars > li > i');
+    applyStarNumber(scoreStar);
+}
+
+function applyStarNumber (starElements) {
+    
+    if (move > 14 && starElements[2].classList.contains("fas")) {
         //2 étoiles
-        scoreStar[2].classList.remove("fas");
-        scoreStar[2].classList.add("far");
+        starElements[2].classList.remove("fas");
+        starElements[2].classList.add("far");
     }
-    else if (move === 20) {
+    if (move > 19 && starElements[1].classList.contains("fas")) {
         //1 étoile
-        scoreStar[1].classList.remove("fas");
-        scoreStar[1].classList.add("far");
+        starElements[1].classList.remove("fas");
+        starElements[1].classList.add("far");
     }
-    else if (move === 25) {
+    if (move > 24 && starElements[0].classList.contains("fas")) {
         //pas d'étoile
-        scoreStar[0].classList.remove("fas");
-        scoreStar[0].classList.add("far");
+        starElements[0].classList.remove("fas");
+        starElements[0].classList.add("far");
     }
 }
 
 function maybeEndGame(card) {
     let faceCard = document.getElementsByClassName('shown-card');
     setTimeout(function(){
-       if (faceCard.length === 2) {
+       if (faceCard.length === 16) {
         const endingTime = performance.now();
-        console.log("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
-        
+        let gameTimer = ("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
+        let timer = document.querySelector('.timer');
+        const endGameStars = document.querySelectorAll('div.alert > ul.stars >li >i');
+        applyStarNumber(endGameStars);
+        timer.textContent = gameTimer;
         popUp.classList.add("win-game");
-        
-        game.classList.add('background-win');
-        // popUp.insertAdjacentElement('beforebegin', scoreStar, movesSpan).children[0];
+        game.classList.add('background-win');  
     }}, 1050);    
-}
-
-const game = document.querySelector('.container');
-const popUp = document.querySelector('.alert');
-
-function playAgain() {
-    const again = document.querySelector('button');
-    const restart = document.querySelector('.restart');
-    restart.addEventListener('click', function(){
-        console.log('restart game');
-        location.reload();
-        var arrayRandom = shuffle(cards);
-        console.log(arrayRandom);
-    })
-    again.addEventListener('click', function() {
-        console.log('want to play again');
-        setTimeout( function() {
-            location.reload();
-        }, 200);
-    })
 }
