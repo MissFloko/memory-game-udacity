@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
     background-image: radial-gradient(rgb(219, 120, 231), rgb(51, 19, 110));
     background-size: cover;
     background-repeat: no-repeat;
