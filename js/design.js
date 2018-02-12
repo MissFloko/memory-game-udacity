@@ -68,6 +68,7 @@ function onCardClicked(event) {
     }
     card.classList.add("shown-card");
     click++;
+    // console.log(click + " click");
     maybeMatch(card);
 }
 
@@ -119,25 +120,20 @@ function applyStarNumber (starElements) {
         starElements[1].classList.remove("fas");
         starElements[1].classList.add("far");
     }
-    if (move > 24 && starElements[0].classList.contains("fas")) {
-        //pas d'étoile
-        starElements[0].classList.remove("fas");
-        starElements[0].classList.add("far");
-    }
 }
 
 // popup of end game
 function maybeEndGame(card) {
     let faceCard = document.getElementsByClassName('shown-card');
     setTimeout(function(){
-       if (faceCard.length === 4) {
-        const endingTime = performance.now();
-        let gameTimer = ("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
-        let timer = document.querySelector('.timer');
-        const endGameStars = document.querySelectorAll('div.alert > ul.stars >li >i');
-        applyStarNumber(endGameStars);
-        timer.textContent = gameTimer;
-        popUp.classList.add("win-game");
-        game.classList.add('background-win');  
+        if (faceCard.length === 16) {
+            const endingTime = performance.now();
+            let gameTimer = ("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
+            let timer = document.querySelector('.timer');
+            const endGameStars = document.querySelectorAll('div.alert > ul.stars >li >i');
+            applyStarNumber(endGameStars);
+            timer.textContent = gameTimer;
+            popUp.classList.add("win-game");
+            game.classList.add('background-win');  
     }}, 1050);    
 }
