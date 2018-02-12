@@ -1,8 +1,8 @@
 // FICHER JS MEMORY GAME
 
-function shuffle(array) {
+//preparation of the beggining of the game
+function shuffleCards(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -15,17 +15,18 @@ function shuffle(array) {
 }
 
 function prepareGame() {
-    let mixImages = shuffle(imageToShuffle);
-    let oneI = Array.from(document.querySelectorAll('ul.deck > li > i.fas'));
-    oneI.forEach(function(i, index) {
+    let mixImages = shuffleCards(imageToShuffle);
+    let eachI = Array.from(document.querySelectorAll('ul.deck > li > i.fas'));
+    eachI.forEach(function(i, index) {
         let oneSymbol = mixImages[index];
         i.className = "fas " + oneSymbol;;
-    }) 
+    })
 }
 
+// list of all the variables needed in the general scope
 const imageToShuffle = ["fa-hand-spock", "fa-hand-spock", "fa-space-shuttle", "fa-space-shuttle", "fa-film", "fa-film", "fa-globe", "fa-globe", "fa-map", "fa-map", "fa-eject", "fa-eject", "fa-paper-plane", "fa-paper-plane", "fa-star", "fa-star"];
 const cards = Array.from(document.getElementsByClassName('card'));
-let card1;
+let firstCard;
 let symbol1;
 let symbol2;
 let click = 0;
@@ -35,20 +36,22 @@ const game = document.querySelector('.container');
 const popUp = document.querySelector('.alert');
 let preventClick = false;
 
+// at the load of the game page
 prepareGame();
 
-cards.forEach(function(card, index) {  //click ans transformation of the card
+// determine what happen for each card clicked
+cards.forEach(function(card, index) {
      card.addEventListener('click', onCardClicked);
      startingTime = performance.now();
 });
 
-const again = document.querySelector('button');
+const playAgain = document.querySelector('button');
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function(){
     console.log('restart game');
     location.reload();
 })
-again.addEventListener('click', function() {
+playAgain.addEventListener('click', function() {
     console.log('want to play again');
     setTimeout( function() {
         location.reload();
@@ -60,17 +63,15 @@ function onCardClicked(event) {
     if (card.className !== 'card') {
         return;
     }
-
     if (preventClick) {
         return;
     }
-
     card.classList.add("shown-card");
     click++;
-    // console.log(click + " click");
     maybeMatch(card);
 }
 
+//does the cards match ?
 function maybeMatch (card) {
     if (click % 2 === 0){
         incrementMove();
@@ -84,30 +85,30 @@ function maybeMatch (card) {
             console.log('try again');
             setTimeout(function(){
                 card.classList.remove("shown-card");
-                card1.classList.remove("shown-card");
+                firstCard.classList.remove("shown-card");
                 preventClick = false;
             }, 700);           
         }
     } else {
         symbol1 = card.children[0].className;
-        card1 = card;
+        firstCard = card;
     }
 }
 
-
+// count of the number of player's moves
 function incrementMove() {
     move++;
     let movesSpan = document.querySelector('.moves');
     movesSpan.innerHTML = move + " Moves";
 }
 
+// change of the stars score depending of the moves
 function changeScore() {
     const scoreStar = document.querySelectorAll('div.score > ul.stars > li > i');
     applyStarNumber(scoreStar);
 }
 
-function applyStarNumber (starElements) {
-    
+function applyStarNumber (starElements) { 
     if (move > 14 && starElements[2].classList.contains("fas")) {
         //2 étoiles
         starElements[2].classList.remove("fas");
@@ -125,10 +126,11 @@ function applyStarNumber (starElements) {
     }
 }
 
+// popup of end game
 function maybeEndGame(card) {
     let faceCard = document.getElementsByClassName('shown-card');
     setTimeout(function(){
-       if (faceCard.length === 16) {
+       if (faceCard.length === 4) {
         const endingTime = performance.now();
         let gameTimer = ("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
         let timer = document.querySelector('.timer');

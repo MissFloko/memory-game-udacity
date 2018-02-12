@@ -162,8 +162,10 @@ h1 {
     background-color:rgba(205, 108, 190, 0.521);
     border: none;
     border-radius: 8%;
-    width: 30%;
-    height: 10%;
+    min-width: 30%;
+    max-width: 40%;
+    min-height: 10%;
+    max-height: 15%;
     text-transform: uppercase;
     margin: 60px 0 15px 0;
     cursor: pointer;
@@ -193,7 +195,7 @@ h1 {
     }
     .alert {
         width: 60%;
-        height: 30%;
+        height: 35%;
     }
     .alert p {
         font-size: 2em;
