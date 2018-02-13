@@ -32,9 +32,11 @@ let symbol2;
 let click = 0;
 let move = 0;
 let startingTime;
+let endingTime;
 const game = document.querySelector('.container');
 const popUp = document.querySelector('.alert');
 let preventClick = false;
+let tickID;
 
 // at the load of the game page
 prepareGame();
@@ -42,7 +44,6 @@ prepareGame();
 // determine what happen for each card clicked
 cards.forEach(function(card, index) {
      card.addEventListener('click', onCardClicked);
-     startingTime = performance.now();
 });
 
 const playAgain = document.querySelector('button');
@@ -68,6 +69,10 @@ function onCardClicked(event) {
     }
     card.classList.add("shown-card");
     click++;
+    if (click === 1) {
+        startingTime = performance.now();
+        tickID = setInterval(tick, 1000);
+    }
     // console.log(click + " click");
     maybeMatch(card);
 }
@@ -125,9 +130,11 @@ function applyStarNumber (starElements) {
 // popup of end game
 function maybeEndGame(card) {
     let faceCard = document.getElementsByClassName('shown-card');
-    setTimeout(function(){
-        if (faceCard.length === 16) {
-            const endingTime = performance.now();
+    if (faceCard.length === 16) {
+        clearInterval(tickID);
+        endingTime = performance.now();
+        changeTimer(endingTime);
+        setTimeout(function(){
             let gameTimer = ("It took you " + ((endingTime - startingTime)/1000).toFixed(0) + "s to finish the game.");
             let timer = document.querySelector('.timer');
             const endGameStars = document.querySelectorAll('div.alert > ul.stars >li >i');
@@ -135,5 +142,16 @@ function maybeEndGame(card) {
             timer.textContent = gameTimer;
             popUp.classList.add("win-game");
             game.classList.add('background-win');  
-    }}, 1050);    
+        }, 1050);
+    }
+}
+
+// chronometre
+function tick() {
+    changeTimer(performance.now());
+}
+
+function changeTimer(time) {
+    const chrono = document.querySelector('.chrono');
+    chrono.innerHTML = ((time - startingTime)/1000).toFixed(0) + " seconds";
 }
